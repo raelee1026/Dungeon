@@ -5,6 +5,8 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <thread>
+#include <chrono>
 #include "Item.h"
 #include "Monster.h"
 #include "NPC.h"
@@ -22,13 +24,15 @@ class Record
 private:
     void savePlayer(Player*, ofstream&);
     void saveRooms(vector<Room>&, ofstream&);
-    void loadPlayer(Player*, ifstream&);
+    void loadPlayer(Player*, ifstream&, vector<Room>&);
     void loadRooms(vector<Room>&, ifstream&);
 
 public:
     Record();
     void saveToFile(Player*, vector<Room>&);
-    void loadFromFile(Player*, vector<Room>&);
+    void loadFromFile(string&, Player*, vector<Room>&);
+
+    bool checkFile(string);
 
 };
 

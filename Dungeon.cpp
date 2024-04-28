@@ -136,9 +136,41 @@ void Dungeon::handleMovement(){
 
 void Dungeon::startGame(){
     string player_name;
+    bool canStart = false;
+    Record record;
 
     cout << "Welcome to Dungeon!" << endl;
     std::this_thread::sleep_for(std::chrono::seconds(1)); 
+    while(!canStart){
+        cout << "Enter your name: ";
+        cin >> player_name;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if(record.checkFile(player_name)){
+            string operation;
+            cout << "Found previous records." << endl;
+            cout << "Do you want to continue?(Enter y for yes, n for no):";
+            cin >> operation;
+            if(operation == "y"){
+                record.loadFromFile(player_name, &player, rooms);
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                cout << "Hello! " << player_name << endl;
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                canStart = true;
+            }
+            else if(operation == "n"){
+                cout << "You have to change a name!" << endl;
+            }
+        }
+        else{
+            cout << "Hello! " << player_name << endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            this->createMap();
+            this->createPlayer(player_name);
+            canStart = true;
+        }
+    }
+    this->runDungeon();
+    /*
     cout << "Enter your name: ";
     cin >> player_name;
     std::this_thread::sleep_for(std::chrono::seconds(1)); 
@@ -148,6 +180,7 @@ void Dungeon::startGame(){
     this->createMap();
     this->createPlayer(player_name);
     this->runDungeon();
+    */
 }
 
 bool Dungeon::checkGameLogic(){
@@ -487,15 +520,15 @@ void Dungeon::runDungeon(){
         cout << "M(m): Move" << endl;
         if(!objects.empty()){
             if(firstobject->getTag() == "NPC"){
-                cout << "C(c): Communicate" << endl;
+                cout << "C(c): Communicate and get items from NPC" << endl;
                 player.setCanCommunicate(true);
             }
             if(firstobject->getTag() == "Monster"){
-                cout << "A(a): Attack" << endl;
+                cout << "A(a): Attack the monster" << endl;
                 player.setCanAttack(true);
             }
         }
-        cout << "E(e): Exit the game" << endl;
+        cout << "E(e): Exit the game and save record" << endl;
         cout << "Enter the operation: ";
 
         cin >> operation;
@@ -509,6 +542,8 @@ void Dungeon::runDungeon(){
         }
 
         if(operation == "e"){
+            Record record;
+            record.saveToFile(&player, rooms);
             break;
         }
         if(operation == "s"){
