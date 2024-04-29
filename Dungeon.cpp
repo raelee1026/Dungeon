@@ -256,7 +256,8 @@ bool Dungeon::isOperation(string& s){
 	if(s == "o") return true;
 	if(s == "m") return true;
 	if(s == "c" && player.getCanCommunicate()) return true;
-    if (s == "a" && player.getCanAttack()) return true;
+    if(s == "a" && player.getCanAttack()) return true;
+    if(s == "g" && player.getCurrentRoom()->getRoomType() == "classroom") return true;
 
     return false;
 }
@@ -460,6 +461,39 @@ void Dungeon::handleRoomSystem(){
                 player.setCurrentHealth(player.getCurrentHealth() - 10);
             }
         }
+        if(player.getCurrentRoom()->getRoomType() == "library"){
+            cout << "----------------------------------------" << endl;
+            cout << "You are in the library right now." << endl;
+            cout << "The library has a very good air conditioner." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "You can take a nap." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "Nap..." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "Nap..." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "Nap..." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "You are full of energy again!" << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "Your HP is restored to 100." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "Your hunger increased by 50." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "Your thirst increased by 50." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            player.setCurrentHealth(100);
+            player.setHunger(player.getHunger() + 50);
+            player.setThirst(player.getThirst() + 50);
+        }
+        if(player.getCurrentRoom()->getRoomType() == "classroom"){
+            cout << "----------------------------------------" << endl;
+            cout << "You are in the classroom right now." << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            cout << "You get a powerful weapon, which is called book!" << endl;
+            this_thread::sleep_for(chrono::seconds(1));
+            player.addItem(Item("book", "weapon", 0, 30, 30, 0, 0, 0));
+        }
 }
 
 void Dungeon::handleEnvironmentItem(){
@@ -509,8 +543,44 @@ void Dungeon::runDungeon(){
         if(!objects.empty())firstobject = objects[0];
 
         player.setCanCommunicate(false);
-        player.setCanAttack(false);        
-        if(!objects.empty() && firstobject->getTag() == "NPC"){
+        player.setCanAttack(false);    
+        if(!objects.empty() && firstobject->getTag() == "NPC" && player.getCurrentRoom()->getRoomType() == "desert"){
+            cout << "* * * * * * * * * *" << endl;
+            cout << "*      Desert     *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*       NPC       *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "* * * * * * * * * *" << endl;
+        } 
+        else if(!objects.empty() && firstobject->getTag() == "NPC" && player.getCurrentRoom()->getRoomType() == "swamp"){
+            cout << "* * * * * * * * * *" << endl;
+            cout << "*      Swamp      *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*       NPC       *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "* * * * * * * * * *" << endl;
+        }
+        else if(!objects.empty() && firstobject->getTag() == "NPC" && player.getCurrentRoom()->getRoomType() == "library"){
+            cout << "* * * * * * * * * *" << endl;
+            cout << "*     library     *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*       NPC       *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "* * * * * * * * * *" << endl;
+        }
+        else if(!objects.empty() && firstobject->getTag() == "NPC" && player.getCurrentRoom()->getRoomType() == "classroom"){
+            cout << "* * * * * * * * * *" << endl;
+            cout << "*    classroom    *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*       NPC       *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "* * * * * * * * * *" << endl;
+        } 
+        else if(!objects.empty() && firstobject->getTag() == "NPC"){
             cout << "* * * * * * * * * *" << endl;
             cout << "*                 *" << endl;
             cout << "*                 *" << endl;
@@ -555,6 +625,24 @@ void Dungeon::runDungeon(){
             cout << "*                 *" << endl;
             cout << "* * * * * * * * * *" << endl;
         }
+        else if(player.getCurrentRoom()->getRoomType() == "library"){
+            cout << "* * * * * * * * * *" << endl;
+            cout << "*     library     *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "* * * * * * * * * *" << endl;
+        }
+        else if(player.getCurrentRoom()->getRoomType() == "classroom"){
+            cout << "* * * * * * * * * *" << endl;
+            cout << "*    classroom    *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "* * * * * * * * * *" << endl;
+        }
         else{
             cout << "* * * * * * * * * *" << endl;
             cout << "*                 *" << endl;
@@ -578,6 +666,7 @@ void Dungeon::runDungeon(){
                 player.setCanAttack(true);
             }
         }
+        if(player.getCurrentRoom()->getRoomType() == "classroom") cout << "G(g): Give up the game, and go back to study." << endl;
         cout << "E(e): Exit the game and save record" << endl;
         cout << "Enter the operation: ";
 
@@ -656,6 +745,15 @@ void Dungeon::runDungeon(){
             if(MonsterInRoom->triggerEvent(&player)){
                 player.getCurrentRoom()->popObject(MonsterInRoom);
             }
+        }
+        if(operation == "g"){
+            Record record;
+            cout << "You have to go back to study!" << endl;
+            this_thread::sleep_for(chrono::seconds(1)); 
+            cout << "So you give up the adventure." << endl;
+            this_thread::sleep_for(chrono::seconds(1)); 
+            record.deleteFile(player.getName());
+            exit(0);
         }
         this->handleRoomSystem();
         this->handleHungerSystem();
