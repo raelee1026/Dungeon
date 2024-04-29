@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <thread>
+#include <chrono>
 #include "GameCharacter.h"
 #include "Room.h"
 #include "Item.h"

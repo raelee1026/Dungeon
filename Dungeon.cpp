@@ -133,14 +133,55 @@ void Dungeon::handleMovement(){
     }
 }
 
+void::Dungeon::handleRules(){
+    cout << "Welcome to the dungeon!" << endl;
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    cout << "Here are the rules of the dungeon." << endl;
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    cout << "Before you start the adventure, you have to remember these rules!" << endl;
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    cout << "As a player, you have two types of states: one is related to your combat ability, and the other is related to your health status." << endl;
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    cout << "HP represents your health points. When your HP reaches 0, the game ends." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "In battles with monsters, your HP may decrease when your hunger or thirst reaches 0." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "Attack represents your combat ability. You can obtain weapons from NPCs to increase your attack." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "Defense represents your defensive ability. You can obtain weapons from NPCs to increase your defense." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "Hunger indicates whether you are hungry. When hunger reaches 0, your HP will decrease." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "You can increase your hunger by obtaining food from NPCs, defeating monsters to obtain food, or finding food in certain rooms. Hunger decreases over time." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "Thirst indicates whether you are thirsty. When thirst reaches 0, your HP will decrease." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "You can increase your thirst by obtaining water from NPCs or certain food items. Thirst decreases over time." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "Poison indicates whether you are poisoned. When poison is not 0, you are poisoned, with higher values indicating deeper poisoning." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "You may accidentally consume poisonous food from NPCs or encounter poison in certain rooms. You can cure poison by obtaining milk. Poison decreases over time after being poisoned." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "In the dungeon, there are different types of rooms: desert, forest, swamp, and regular rooms." << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "Remember, each room may hold different surprises!" << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "Finally, if you defeat the boss, you will achieve victory!" << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "Good luck!" << endl;
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "----------------------------------------" << endl;
+}
+
 
 void Dungeon::startGame(){
     string player_name;
     bool canStart = false;
     Record record;
 
-    cout << "Welcome to Dungeon!" << endl;
-    std::this_thread::sleep_for(std::chrono::seconds(1)); 
+    //this->handleRules();
+    //cout << "Welcome to Dungeon!" << endl;
+    //std::this_thread::sleep_for(std::chrono::seconds(1)); 
     while(!canStart){
         cout << "Enter your name: ";
         cin >> player_name;
@@ -150,15 +191,22 @@ void Dungeon::startGame(){
             cout << "Found previous records." << endl;
             cout << "Do you want to continue?(Enter y for yes, n for no):";
             cin >> operation;
+            operation[0] = tolower(operation[0]);
             if(operation == "y"){
                 record.loadFromFile(player_name, &player, rooms);
                 std::this_thread::sleep_for(std::chrono::seconds(1));
                 cout << "Hello! " << player_name << endl;
                 std::this_thread::sleep_for(std::chrono::seconds(1));
+                cout << "Welcome back!" << endl;
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+
                 canStart = true;
             }
             else if(operation == "n"){
                 cout << "You have to change a name!" << endl;
+            }
+            else{
+                cout << "Invalid input(s)" << endl;
             }
         }
         else{
@@ -192,6 +240,8 @@ bool Dungeon::checkGameLogic(){
         cout << "Game Over!!" << endl;
         cout << "Game Over!!!" << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1)); 
+        Record record;
+        record.deleteFile(this->player.getName());
         exit(0);
         //return false;
     }
@@ -547,7 +597,7 @@ void Dungeon::runDungeon(){
             break;
         }
         if(operation == "s"){
-            cout << player.getName() << "'s Status: " << endl;
+            cout << player.getName() << "'s status: " << endl;
             cout << "HP: " << player.getCurrentHealth() << '/' << player.getMaxHealth() << endl;
             cout << "Attack: " << player.getAttack() << endl;
             cout << "Defense: " << player.getDefense() << endl;
@@ -584,17 +634,25 @@ void Dungeon::runDungeon(){
         }
         if(operation == "c"){
             NPC* NpcInRoom = dynamic_cast<NPC*>(firstobject);
-            cout << "NPC's name: " << NpcInRoom->getName() << endl;
-            cout << NpcInRoom->getScript() << endl;
-            //NpcInRoom->listCommodity();
+            //cout << "NPC's name: " << NpcInRoom->getName() << endl;
+            cout << NpcInRoom->getName() << ": Hello! I'm " << NpcInRoom->getName() << endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1)); 
+            cout << NpcInRoom->getName() << ": " << NpcInRoom->getScript() << endl;
+            std::this_thread::sleep_for(std::chrono::seconds(2)); 
+            cout << NpcInRoom->getName() << ": Here are the items I have. Which one do you want?" << endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1)); 
             if(NpcInRoom->triggerEvent(&player)){
                 player.getCurrentRoom()->popObject(NpcInRoom);
             }
         }
         if(operation == "a"){
             Monster* MonsterInRoom = dynamic_cast<Monster*>(firstobject);
-            cout << "Monster's name: " << MonsterInRoom->getName() << endl;
-            cout << "Monster is here" << endl;
+            cout << MonsterInRoom->getName() << ": I'm " << MonsterInRoom->getName() << endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1)); 
+            cout << MonsterInRoom->getName() << ": You really want to fight" << endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1)); 
+            cout << MonsterInRoom->getName() << ": Come on!" << endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1)); 
             if(MonsterInRoom->triggerEvent(&player)){
                 player.getCurrentRoom()->popObject(MonsterInRoom);
             }

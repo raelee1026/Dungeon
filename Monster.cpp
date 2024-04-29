@@ -13,8 +13,6 @@ bool Monster::triggerEvent(Object* obj){
     //get poison from the monster
     if(this->getName() == "Littlemonster" && this->getCurrentHealth() == 50 ){
         player->addItem(Item("devilpoison", "poison", 0, 0, 0, 0, 0, 10));
-        cout << "You meet the Littlemonster!!!" << endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
         cout << "The Littlemonster forced you to drink the Devil Poison." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
         cout << "Your poison increased by 10." << endl;
@@ -65,6 +63,8 @@ bool Monster::triggerEvent(Object* obj){
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     cout << "Congratulation!!!" << endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1));
+                    Record record;
+                    record.deleteFile(player->getName());
                     exit(0);
                 }
                 //other monster(Littlemonster) continue the game, get food from Littlemonster(if it is dead)

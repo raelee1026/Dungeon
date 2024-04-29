@@ -227,3 +227,21 @@ bool Record::checkFile(string theName){
 
     return true;
 }
+
+void Record::deleteFile(string playerName) {
+        // Delete map file
+        string mapFileName = playerName + "_map.txt";
+        if (remove(mapFileName.c_str()) != 0) {
+            //cout << "Error deleting map file: " << mapFileName << std::endl;
+        } else {
+            //cout << "Map file deleted: " << mapFileName << std::endl;
+        }
+
+        // Delete player file
+        string playerFileName = playerName + "_player.txt";
+        if (remove(playerFileName.c_str()) != 0) {
+            //cout << "Error deleting player file: " << playerFileName << std::endl;
+        } else {
+            //cout << "Player file deleted: " << playerFileName << std::endl;
+        }
+    }

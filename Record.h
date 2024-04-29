@@ -33,6 +33,7 @@ public:
     void loadFromFile(string&, Player*, vector<Room>&);
 
     bool checkFile(string);
+    void deleteFile(string);
 
 };
 

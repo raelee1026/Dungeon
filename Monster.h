@@ -11,6 +11,7 @@
 #include "GameCharacter.h"
 #include "Player.h"
 #include "Item.h"
+#include "Record.h"
 
 using namespace std;
 

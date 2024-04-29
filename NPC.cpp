@@ -42,8 +42,8 @@ bool NPC::triggerEvent(Object* obj){
     bool picked = false;
     for(int i=0; i<list.size(); i++){
         if(i == theItemNumber){
-            player->addItem(list[i]);
             cout << "You picked up " << list[i].getName() << endl;
+            player->addItem(list[i]);
             picked = true;
         }
         else{

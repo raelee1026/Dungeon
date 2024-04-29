@@ -16,6 +16,33 @@ Player::Player(string theName, int theHealth, int theAttack, int theDefense, int
 void Player::addItem(Item theItem){
     this->increaseStates(theItem.getHealth(), theItem.getAttack(), theItem.getDefense(), theItem.getHunger(), theItem.getThirst(), theItem.getPoison());
     this->inventory.push_back(theItem);
+    if(theItem.getName() == "SuperWater"){
+        cout << "Wow, you drank super water! It's really helpful. You aren't thirsty anymore." << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+    else if(theItem.getName() == "Water"){
+        cout << "Wow, you drank water! It's really helpful. You aren't thirsty anymore." << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+    else if(theItem.getName() == "Milk"){
+        cout << "Wow, you drank milk! It's really helpful. It helps you detoxify." << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+    else if(theItem.getName() == "SuperMilk"){
+        cout << "Wow, you drank super milk! It's really helpful. It helps you detoxify." << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+    else if(theItem.getName() == "GreenBanana"){
+        cout << "Oops! The green banana is actually poison." << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+        cout << "You were tricked! Hahaha!" << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+    else if(theItem.getName() == "VioletBanana"){
+        cout << "Oops! The violet banana is actually poison." << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+    
 }
 
 void Player::increaseStates(int theHealth, int theAttack, int theDefense, int theHunger, int theThirst, int thePoison){

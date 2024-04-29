@@ -1,46 +1,46 @@
 7
 1
-name1
-This is what name1 is going to say.
+Blaze
+The N-bomb is the best weapon. If you find it, you have a better chance to beat every monster. 
 3
 Sword Weapon 10 10 10 0 0 0
 RedBanana Food 0 0 0 20 0 0
 SuperWater drink 0 0 0 0 50 0
 3
-name2
-This is what name2 is going to say.
+Luna
+Be careful when you step into the forest. You might accidentally eat a poisonbanana, and you will get poisoned.
 1
 OrangeBanana Food 0 0 0 30 0 0
 5
-name3
-This is what name3 is going to say.
+Rex
+Are you poisoned? Milk can help you detoxify.
 2
 Milk Drink 0 0 0 0 30 -50
 YellowBanana Food 0 0 0 30 0 0
 6
-name4
-This is what name4 is going to say.
+Ivy
+The greenbanana sounds really delicious. Do you want to eat it? I really like it.
 2
 Spear Weapon 20 20 10 0 0 0
 GreenBanana Food 0 0 0 10 10 10
 9
-name5
-This is what name5 is going to say.
+Aurora
+I have weapons, food, and drinks. Everything you need is here. Remember to come back!
 3
 Blade Weapon 30 30 20 0 0 0
 Water Drink 0 0 0 0 20 0
 BlueBanana Food 0 0 0 20 0 0
 10
-name6
-This is what name6 is going to say.
+Ember
+Super milk is the best antidote you can get. If you are not poisoned, don't pick it up. Remember to come back when you are poisoned!
 3
 Axe Weapon 10 40 10 0 0 0
 IndigoBanana Food 0 0 0 30 0 0
 SuperMilk Drink 0 0 0 0 50 -100
 13
-name7
-This is what name7 is going to say.
+Zephyr
+You finally found the N-Bomb! Quickly pick it up and go fight the boss. Keep going!
 2
-Whip Weapon 30 50 20 0 0 0
+N-bomb Weapon 30 70 20 0 0 0
 VioletBanana Food 0 0 0 10 10 20
 

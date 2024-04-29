@@ -57,7 +57,7 @@ public:
     void handleHungerSystem();
     void handleRoomSystem();
     void handleEnvironmentItem();
-
+    void handleRules();
 };
 
 
