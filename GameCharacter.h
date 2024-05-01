@@ -19,7 +19,7 @@ private:
     int poison;
 public:
     GameCharacter();
-    GameCharacter(string,string,int,int,int);
+    GameCharacter(string, string, int, int, int);
     GameCharacter(string, string, int, int, int, int, int, int);
     bool checkIsDead();
     int takeDamage(int);

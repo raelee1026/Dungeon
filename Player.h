@@ -24,6 +24,7 @@ private:
     bool canAttack = false;
     bool canGetFoodEnvironment = true;
     bool canGetPoisonEnvironment = true;
+    bool canGetWeaponEnvironment = true;
 public:
     Player();
     //Player(string, int, int, int);
@@ -54,6 +55,8 @@ public:
     bool getCanGetFoodEnvironment();
     void setCanGetPoisonEnvironment(bool);
     bool getCanGetPoisonEnvironment();
+    void setCanGetWeaponEnvironment(bool);
+    bool getCanGetWeaponEnvironment();
 };
 
 #endif // PLAYER_H_INCLUDED

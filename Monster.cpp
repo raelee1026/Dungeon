@@ -96,6 +96,8 @@ bool Monster::triggerEvent(Object* obj){
             std::this_thread::sleep_for(std::chrono::seconds(1));
             cout << "Game Over!!!" << endl;
             std::this_thread::sleep_for(std::chrono::seconds(1));
+            Record record;
+            record.deleteFile(player->getName());
             //break;
             exit(0);
         }

@@ -1,5 +1,7 @@
-2
+3
 15
 Boss 100 100 50
 8
 Littlemonster 50 10 0
+4
+swampmonster 100 50 20

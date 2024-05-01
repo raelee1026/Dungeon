@@ -5,7 +5,7 @@ The N-bomb is the best weapon. If you find it, you have a better chance to beat 
 3
 Sword Weapon 10 10 10 0 0 0
 RedBanana Food 0 0 0 20 0 0
-SuperWater drink 0 0 0 0 50 0
+SuperWater Drink 0 0 0 0 50 0
 3
 Luna
 Be careful when you step into the forest. You might accidentally eat a poisonbanana, and you will get poisoned.

@@ -15,7 +15,8 @@ void Record::savePlayer(Player* thePlayer, ofstream& file_output){
     file_output << thePlayer->getCanCommunicate() << ' '
                 << thePlayer->getCanAttack() << ' '
                 << thePlayer->getCanGetFoodEnvironment() << ' '
-                << thePlayer->getCanGetPoisonEnvironment() << endl;
+                << thePlayer->getCanGetPoisonEnvironment() << ' '
+                << thePlayer->getCanGetWeaponEnvironment() << endl;
     
     Room* cur = thePlayer->getCurrentRoom();
     Room* prv = thePlayer->getPreviousRoom();
@@ -46,12 +47,13 @@ void Record::loadPlayer(Player* thePlayer, ifstream& file_input, vector<Room>& r
     *thePlayer = *(new Player(theName, theCurrentHealth, theAttack, theDefense, theHunger, theThirst, thePoison));
     thePlayer->setMaxHealth(theMaxHealth);
 
-    bool theCanCommunicate, theCanAttack, theCanGetFoodEnvironment, theCanGetPoisonEnvironment;
-    file_input >> theCanCommunicate >> theCanAttack >> theCanGetFoodEnvironment >> theCanGetPoisonEnvironment;
+    bool theCanCommunicate, theCanAttack, theCanGetFoodEnvironment, theCanGetPoisonEnvironment, theCanGetWeaponEnvironment;
+    file_input >> theCanCommunicate >> theCanAttack >> theCanGetFoodEnvironment >> theCanGetPoisonEnvironment >> theCanGetWeaponEnvironment;
     thePlayer->setCanCommunicate(theCanCommunicate);
     thePlayer->setCanAttack(theCanAttack);
     thePlayer->setCanGetFoodEnvironment(theCanGetFoodEnvironment);
     thePlayer->setCanGetPoisonEnvironment(theCanGetPoisonEnvironment);
+    thePlayer->setCanGetWeaponEnvironment(theCanGetWeaponEnvironment);
 
     int curRoomIndex, prvRoomIndex;
     file_input >> curRoomIndex >>prvRoomIndex;

@@ -25,4 +25,4 @@ txtfiles: $(TXTS)
 clean:
 	rm -rf $(BUILDDIR)/*.o $(TARGET)
 
-.PHONY: txtfiles
+.PHONY: txtfiles  

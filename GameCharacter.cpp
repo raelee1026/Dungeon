@@ -28,7 +28,7 @@ bool GameCharacter::checkIsDead(){
 int GameCharacter::takeDamage(int t){
 	int damageCause;
 	//cout << "deal with takeDamage" << endl;
-	damageCause = t - defense; //still thinking about it
+	damageCause = t - defense; 
 	if(damageCause < 0){
 		damageCause = 0;
 	}
@@ -53,11 +53,11 @@ void GameCharacter::setDefense(int theDefense){
 }
 
 void GameCharacter::setHunger(int theHunger){
-	this->hunger = max(theHunger, 0);
+	this->hunger = min(max(theHunger, 0), 200);
 }
 
 void GameCharacter::setThirst(int theThirst){
-	this->thirst = max(theThirst, 0);
+	this->thirst = min(max(theThirst, 0), 200);
 }
 
 void GameCharacter::setPoison(int thePoison){

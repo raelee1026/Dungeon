@@ -62,7 +62,13 @@ void Player::changeRoom(Room* now){
 
 //show the status of player
 bool Player::triggerEvent(Object* objs){
-	cout << "show the status of player" << endl;
+	cout << getName() << "'s status: " << endl;
+    cout << "HP: " << getCurrentHealth() << '/' << getMaxHealth() << endl;
+    cout << "Attack: " << getAttack() << endl;
+    cout << "Defense: " << getDefense() << endl;
+    cout << "Hunger: " << getHunger() << endl;
+    cout << "Thirst: " << getThirst() << endl;
+    cout << "Poison: " << getPoison() << endl;
     return false;
 }
 
@@ -124,5 +130,13 @@ void Player::setCanGetPoisonEnvironment(bool k){
 
 bool Player::getCanGetPoisonEnvironment(){
     return this->canGetPoisonEnvironment;
+}
+
+void Player::setCanGetWeaponEnvironment(bool k){
+    this->canGetWeaponEnvironment = k;
+}
+
+bool Player::getCanGetWeaponEnvironment(){
+    return this->canGetWeaponEnvironment;
 }
 
