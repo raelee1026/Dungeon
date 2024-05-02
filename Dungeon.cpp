@@ -4,8 +4,8 @@ Dungeon::Dungeon(){}
 
 void Dungeon::createPlayer(string& theName){
     srand(time(NULL));
-    bool possibility = rand() % 2;
-    if(possibility == true){
+    bool chance = rand() % 2;
+    if(chance == true){
         this->player = Player(theName, 100, 10, 50, 50, 50, 0);
         cout << endl << "You are a student" << endl << endl;
         this_thread::sleep_for(chrono::seconds(1));
