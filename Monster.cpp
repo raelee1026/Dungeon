@@ -61,29 +61,41 @@ bool Monster::triggerEvent(Object* obj){
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     cout << "You win!!!" << endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1));
-                    cout << "Congratulation!!!" << endl;
+                    cout << " a88888b.                                                dP            dP            dP   oo                            dP " << endl;
+                    cout << "d8'   `88                                                88            88            88                                 88 " << endl;
+                    cout << "88        .d8888b. 88d888b. .d8888b. 88d888b. .d8888b. d8888P dP    dP 88 .d8888b. d8888P dP .d8888b. 88d888b. .d8888b. 88 " << endl;
+                    cout << "88        88'  `88 88'  `88 88'  `88 88'  `88 88'  `88   88   88    88 88 88'  `88   88   88 88'  `88 88'  `88 Y8ooooo. dP " << endl;
+                    cout << "Y8.   .88 88.  .88 88    88 88.  .88 88       88.  .88   88   88.  .88 88 88.  .88   88   88 88.  .88 88    88       88    " << endl;
+                    cout << " Y88888P' `88888P' dP    dP `8888P88 dP       `88888P8   dP   `88888P' dP `88888P8   dP   dP `88888P' dP    dP `88888P' oo " << endl;
+                    cout << "                                 .88                                                                                       " << endl;
+                    cout << "                             d8888P                                                                                         " << endl << endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     Record record;
                     record.deleteFile(player->getName());
                     exit(0);
                 }
                 //other monster(Littlemonster) continue the game, get food from Littlemonster(if it is dead)
-                else{
+                else if(this->getName() == "Littlemonster"){
                     cout << "The monster(" << this->getName() << ") is dead" << endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1));
-                    cout << "You beat the Little Monster." << endl;
+                    cout << "You beat the Littlemonster." << endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     cout << "You are such a hero." << endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     cout << "You are going to eat the superbanana that the Littlemonster left." << endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     cout << "Eat..." << endl;
-                    player->addItem(Item("superbanana", "food", 50, 0, 0, 50, 50, 0)); 
+                    player->addItem(Item("SuperBanana", "food", 50, 0, 0, 50, 50, 0)); 
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     cout << "Your hunger, thirst, and HP all increased by 50." << endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     return true;
-                }   
+                } 
+                else if(this->getName() == "Swampmonster"){
+                    cout << "The monster(" << this->getName() << ") is dead" << endl;
+                    std::this_thread::sleep_for(std::chrono::seconds(1));
+                    cout << "Good job!" << endl;
+                }
             }
         }
 

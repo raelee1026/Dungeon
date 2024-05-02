@@ -69,7 +69,7 @@ bool Player::triggerEvent(Object* objs){
     cout << "Hunger: " << getHunger() << endl;
     cout << "Thirst: " << getThirst() << endl;
     cout << "Poison: " << getPoison() << endl;
-    return false;
+    return true;
 }
 
 void Player::setCurrentRoom(Room* now){

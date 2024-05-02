@@ -3,11 +3,22 @@
 Dungeon::Dungeon(){}
 
 void Dungeon::createPlayer(string& theName){
-    this->player = Player(theName, 100, 10, 0, 100, 100, 0);
+    srand(time(NULL));
+    bool possibility = rand() % 2;
+    if(possibility == true){
+        this->player = Player(theName, 100, 10, 50, 50, 50, 0);
+        cout << endl << "You are a student" << endl << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+        player.triggerEvent(&player);
+    }
+    else{
+        this->player = Player(theName, 100, 50, 10, 100, 100, 0);
+        cout << endl<< "You are a warrior" << endl << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+        player.triggerEvent(&player);
+    }
     this->player.setCurrentRoom(&rooms[0]);
     this->player.setPreviousRoom(&rooms[0]); 
-    //this->player.setCurrentRoom(&rooms[14]);  //for test
-    //this->player.setPreviousRoom(&rooms[14]);  //for test
 }
 
 void Dungeon::createMap(){
@@ -185,6 +196,12 @@ void Dungeon::startGame(){
     //cout << "Welcome to Dungeon!" << endl;
     //std::this_thread::sleep_for(std::chrono::seconds(1)); 
     while(!canStart){
+        cout << "    ____                                   " << endl;
+        cout << "   / __ \\__  ______  ____ ____  ____  ____" << endl;
+        cout << "  / / / / / / / __ \\/ __ `/ _ \\/ __ \\/ __ \\" << endl;
+        cout << " / /_/ / /_/ / / / / /_/ /  __/ /_/ / / / /" << endl;
+        cout << "/_____/\\__,_/_/ /_/\\__, /\\___/\\____/_/ /_/ " << endl;
+        cout << "                  /____/                   " << endl << endl;
         cout << "Enter your name: ";
         cin >> player_name;
         std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -292,6 +309,11 @@ void Dungeon::handleHungerSystem(){
         cout <<"So your HP decreased by 10." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
         player.setCurrentHealth(player.getCurrentHealth()-10);
+        cout << "Because you are too thirsty, you don't have power to attack." << endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1)); 
+        cout <<"So your Attack decreased by 10." << endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        player.setCurrentHealth(player.getAttack()-10);  //debuff
     }
     if(player.getPoison() != 0){
         cout << "----------------------------------------" << endl;
@@ -301,13 +323,13 @@ void Dungeon::handleHungerSystem(){
         std::this_thread::sleep_for(std::chrono::seconds(1));
         cout << "It really affects your health." << endl; 
         std::this_thread::sleep_for(std::chrono::seconds(1));  
-        cout <<"So your HP decreased by 10." << endl;
+        cout <<"So your HP decreased by" << player.getPoison() << "." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        player.setCurrentHealth(player.getCurrentHealth()-10);
+        player.setCurrentHealth(player.getCurrentHealth()-player.getPoison());  //decrese same amount
         cout << "----------------------------------------" << endl;
         cout << "As time goes by, your poison decreases by 10." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        player.setPoison(player.getPoison()-10);
+        player.setPoison(player.getPoison()-10);        //duration time
         cout << "You gradually become less poisoned." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
@@ -517,36 +539,21 @@ void Dungeon::handleEnvironmentItem(){
             player.setCanGetFoodEnvironment(false);
         }
         else if(choice == 1){
-            cout << "You miss a great chance to get food!" << endl;
+            cout << "You missed a great chance to get food!" << endl;
             this_thread::sleep_for(chrono::seconds(1));
         }
         else{
             cout << "invalid input(s)!" << endl;
         }
-        /*
-        player.addItem(Item("apple", "food", 0, 0, 0, 50, 30, 0));
-        cout << "----------------------------------------" << endl;
-        cout << "Wow! There is an apple on the floor. You picked it up." << endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));         
-        cout << "And eat it." << endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1)); 
-        cout << "Eat..." << endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1)); 
-        cout << "The apple is very yummy." << endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1)); 
-        cout << "Your hunger increased by 50, and your thirst increased by 30." << endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1)); 
-        player.setCanGetFoodEnvironment(false);
-        */
     }
     if(player.getCurrentRoom()->getIndex() == 4 && player.getCanGetPoisonEnvironment() == true){
-        player.addItem(Item("poisonbanana", "poison", 0, 0, 0, 10, 0, 20));
+        player.addItem(Item("PoisonBanana", "poison", 0, 0, 0, 10, 0, 20));
         cout << "----------------------------------------" << endl;
-        cout << "You accidentally picked up a poisonbanana on the floor." << endl;
+        cout << "You accidentally picked up a PoisonBanana on the floor." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1)); 
         cout << "And you ate it." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1)); 
-        cout << "You were poisoned by the poisonbanana." << endl;
+        cout << "You were poisoned by the PoisonBanana." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1)); 
         cout << "Your poison increased by 20." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1)); 
@@ -560,12 +567,6 @@ void Dungeon::handleEnvironmentItem(){
         cout << "----------------------------------------" << endl;
         cout << "You are in the classroom right now." << endl;
         this_thread::sleep_for(chrono::seconds(1));
-        /*
-        cout << "You get a powerful weapon, which is called book!" << endl;
-        this_thread::sleep_for(chrono::seconds(1));
-        player.addItem(Item("book", "Weapon", 0, 30, 30, 0, 0, 0));
-        player.setCanGetWeaponEnvironment(false);
-        */
         cout << "There is a power weapon called book!" << endl;
         this_thread::sleep_for(chrono::seconds(1));
         cout << "You can pick it up if you want!" << endl;
@@ -635,6 +636,15 @@ void Dungeon::runDungeon(){
             cout << "*    classroom    *" << endl;
             cout << "*                 *" << endl;
             cout << "*       NPC       *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*                 *" << endl;
+            cout << "* * * * * * * * * *" << endl;
+        } 
+        else if(!objects.empty() && firstobject->getTag() == "Monster" && player.getCurrentRoom()->getRoomType() == "forest"){
+            cout << "* * * * * * * * * *" << endl;
+            cout << "*     Forest      *" << endl;
+            cout << "*                 *" << endl;
+            cout << "*     Monster     *" << endl;
             cout << "*                 *" << endl;
             cout << "*                 *" << endl;
             cout << "* * * * * * * * * *" << endl;

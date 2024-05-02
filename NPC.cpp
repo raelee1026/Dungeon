@@ -16,14 +16,9 @@ void NPC::listCommodity(){
 
 //deal with transaction
 bool NPC::triggerEvent(Object* obj){
-    //cout << "deal with transaction" << endl;
     Player* player = dynamic_cast<Player*>(obj);
     if(player == NULL) return false;
 
-    /*
-    cout << "Enter the item you want(You can only pick one item): ";
-    string theItemName; 
-    cin >> theItemName;*/
     vector<Item> tmp;
     vector<Item> list = commodity;
     for(int i=0; i<list.size(); i++){
@@ -50,23 +45,10 @@ bool NPC::triggerEvent(Object* obj){
             tmp.push_back(list[i]);
         }
     }
-    //tmp.push_back(list[theItemNumber]);
-    /*
-    for(auto i: commodity){
-        if(i.getName() == theItemName){
-            player->addItem(i);
-            cout << "You picked up " << theItemName << endl;
-            picked = true;
-            continue;;
-        }
-        tmp.push_back(i);
-    }*/
     if(picked){
         this->setCommodity(tmp);
         return(this->commodity.size() == 0);
     }
-
-    //cout << "There is no " << theItemName << endl;
     cout << "There is no Item number " << theItemNumber << " for you to pick." << endl;
     return false;
 }
