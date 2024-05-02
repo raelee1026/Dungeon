@@ -192,7 +192,7 @@ void Dungeon::startGame(){
     bool canStart = false;
     Record record;
 
-    //this->handleRules();
+    this->handleRules();
     //cout << "Welcome to Dungeon!" << endl;
     //std::this_thread::sleep_for(std::chrono::seconds(1)); 
     while(!canStart){
